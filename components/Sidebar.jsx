@@ -53,8 +53,12 @@ export default function Sidebar() {
         />
         <div className="leading-5 hidden xl:inline">
           <h4 className="font-bold">Mohamed Mostafa</h4>
-          <p className="text-gray-500">mohamedmostafa12370@gmail.com</p>
+          <p className="text-gray-500">
+            mohamedmostafa12370 <br />
+            @gmail.com
+          </p>
         </div>
+
         <DotsHorizontalIcon className="h-5 xl:ml-8 hidden xl:inline" />
       </div>
     </div>
