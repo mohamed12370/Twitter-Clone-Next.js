@@ -42,7 +42,7 @@ export async function getServerSideProps() {
   const randomUsers = await fetch(
     `https://randomuser.me/api/?results=30&inc=name,login,picture`
   );
-  const dataUser = await randomUsers.json();
+  const dataUser = (await randomUsers.json()) || [];
   return {
     props: { newsResults: data, randomUsersResults: dataUser },
   };
