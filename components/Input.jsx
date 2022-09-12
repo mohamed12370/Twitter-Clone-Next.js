@@ -39,7 +39,7 @@ export default function Input() {
       await uploadString(imageRef, selectedFile, 'data_url').then(async () => {
         const downloadURL = await getDownloadURL(imageRef);
         await updateDoc(doc(db, 'posts', docRef.id), {
-          imagge: downloadURL,
+          image: downloadURL,
         });
       });
     }
@@ -83,7 +83,7 @@ export default function Input() {
               <div className="relative">
                 <XIcon
                   onClick={() => setSelectedFile(null)}
-                  className="h-7 text-black absolute cursor-pointer shadow-md shadow-white rounded-full"
+                  className="h-7 text-black absolute cursor-pointer shadow-md border-white rounded-full border m-1"
                 />
                 <img
                   src={selectedFile}
