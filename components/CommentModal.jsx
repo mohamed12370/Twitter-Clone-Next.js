@@ -17,6 +17,8 @@ import {
 import { db } from '../firebase';
 import Moment from 'react-moment';
 import { useSession } from 'next-auth/react';
+import { userState } from '../atom/userAtom';
+import { useRouter } from 'next/router';
 
 export default function ComponentModal() {
   const [open, setOpen] = useRecoilState(modalState);
@@ -25,6 +27,7 @@ export default function ComponentModal() {
   const [input, setInput] = useState('');
   const { data: session } = useSession();
   const router = useRouter();
+  // const [currentUser] = useRecoilState(userState);
 
   useEffect(() => {
     onSnapshot(doc(db, 'posts', postId), (snapshot) => {
@@ -35,16 +38,16 @@ export default function ComponentModal() {
   async function sendComment() {
     await addDoc(collection(db, 'posts', postId, 'comments'), {
       comment: input,
-      name: currentUser.name,
-      username: currentUser.username,
-      userImg: currentUser.userImg,
+      name: session.user.name,
+      username: session.user.username,
+      userImg: session.user.image,
       timestamp: serverTimestamp(),
-      userId: currentUser.uid,
+      // userId: session.user.uid,
     });
 
     setOpen(false);
     setInput('');
-    //router.push(`/posts/${postId}`);
+    router.push(`/posts/${postId}`);
   }
 
   return (
