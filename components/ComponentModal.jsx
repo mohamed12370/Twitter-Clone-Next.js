@@ -7,7 +7,13 @@ import {
   XIcon,
 } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
-import { doc, onSnapshot } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 import Moment from 'react-moment';
 import { useSession } from 'next-auth/react';
@@ -18,6 +24,7 @@ export default function ComponentModal() {
   const [post, setPost] = useState({});
   const [input, setInput] = useState('');
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     onSnapshot(doc(db, 'posts', postId), (snapshot) => {
@@ -37,7 +44,7 @@ export default function ComponentModal() {
 
     setOpen(false);
     setInput('');
-    router.push(`/posts/${postId}`);
+    //router.push(`/posts/${postId}`);
   }
 
   return (
@@ -91,8 +98,8 @@ export default function ComponentModal() {
             text-gray-700"
                     rows="2"
                     placeholder="Tweet your reply"
-                    // value={input}
-                    //onChange={(e) => setInput(e.target.value)}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
                   ></textarea>
                 </div>
 
