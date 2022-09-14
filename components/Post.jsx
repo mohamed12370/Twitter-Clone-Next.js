@@ -92,24 +92,32 @@ export default function Post({ post, id }) {
           {/* post user info */}
           <div className="flex items-center space-x-1 whitespace-nowrap">
             <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline">
-              {post?.data().name}
+              {post?.data()?.name}
             </h4>
             <span className="text-sm sm:text-[15px]">
-              @{post?.data().username} -{' '}
+              @{post?.data()?.username} -{' '}
             </span>
             <span className="text-sm sm:text-[15px] hover:underline">
-              <Moment fromNow>{post?.data().timestamp?.toDate()}</Moment>
+              <Moment fromNow>{post?.data()?.timestamp?.toDate()}</Moment>
             </span>
           </div>
           {/* dot icon */}
           <DotsHorizontalIcon className="h-10 hoverEffect w-10 hover:bg-sky-100 hover:text-sky-500" />
         </div>
         {/* post text */}
-        <p className="text-[15px] sm:text-[16px] text-gray-800 mb-2">
-          {post?.data().text}
+        <p
+          onClick={() => router.push(`/posts/${id}`)}
+          className="text-[15px] sm:text-[16px] text-gray-800 mb-2"
+        >
+          {post?.data()?.text}
         </p>
         {/* post imae  */}
-        <img className="rounded-2xl mr-2 " src={post?.data().image} alt="" />
+        <img
+          onClick={() => router.push(`/posts/${id}`)}
+          className="rounded-2xl mr-2 "
+          src={post?.data()?.image}
+          alt=""
+        />
         {/* icons */}
         <div className="flex justify-between text-gray-500 p-2">
           <div className="flex items-center select-none">
@@ -129,7 +137,7 @@ export default function Post({ post, id }) {
             )}
           </div>
 
-          {session?.user.uid === post?.data().id && (
+          {session?.user?.uid === post?.data()?.id && (
             <TrashIcon
               onClick={deletePost}
               className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"
